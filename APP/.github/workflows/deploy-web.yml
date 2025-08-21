@@ -1,0 +1,18 @@
+name: Deploy Web
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Firebase deploy
+        if: env.FIREBASE_TOKEN != ''
+        run: cd web-app && npm ci && npm run deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

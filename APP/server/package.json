@@ -1,0 +1,19 @@
+{
+  "name": "app-pyme-server",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/app.ts",
+    "start": "node dist/app.js",
+    "build": "tsc -p ."
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "oracledb": "^6.9.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4"
+  }
+}

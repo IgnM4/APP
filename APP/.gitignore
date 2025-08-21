@@ -1,0 +1,9 @@
+# General
+node_modules/
+.DS_Store
+# Java build
+**/target/
+# ---- project ignores ----
+*.zip
+*.log
+*.lst

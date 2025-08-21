@@ -1,0 +1,6 @@
+url=jdbc:oracle:thin:@//localhost:1521/XEPDB1
+username=APP_PYME
+password=App_Pyme_2025
+changeLogFile=liquibase/changelog-master.xml
+defaultSchemaName=APP_PYME
+searchPath=db-project,db-project/liquibase,db-project/ddl

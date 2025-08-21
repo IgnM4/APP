@@ -1,0 +1,74 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "DB: create app user (SYS)",
+      "type": "shell",
+      "command": "sql",
+      "args": ["${input:sysConn}", "@db-project/ddl/00_create_user.sql"],
+      "presentation": {"reveal": "always"}
+    },
+    {
+      "label": "DB: run_all / demo flow / reset",
+      "type": "shell",
+      "command": "sql",
+      "args": ["${input:appConn}", "@db-project/run_all.sql"],
+      "presentation": {"reveal": "always"}
+    },
+    {
+      "label": "LB: status",
+      "type": "shell",
+      "command": "liquibase",
+      "args": ["--defaultsFile=db-project/liquibase/liquibase.properties", "status"]
+    },
+    {
+      "label": "LB: update",
+      "type": "shell",
+      "command": "liquibase",
+      "args": ["--defaultsFile=db-project/liquibase/liquibase.properties", "update"]
+    },
+    {
+      "label": "LB: updateSQL",
+      "type": "shell",
+      "command": "liquibase",
+      "args": ["--defaultsFile=db-project/liquibase/liquibase.properties", "updateSQL"]
+    },
+    {
+      "label": "LB: history",
+      "type": "shell",
+      "command": "liquibase",
+      "args": ["--defaultsFile=db-project/liquibase/liquibase.properties", "history"]
+    },
+    {
+      "label": "KPI: publish",
+      "type": "shell",
+      "command": "sql",
+      "args": ["${input:appConn}", "@scripts/publish_kpis.sql"],
+      "presentation": {"reveal": "always"}
+    },
+    {
+      "label": "KPI: export hoy y últimos 7 días",
+      "type": "shell",
+      "command": "sql",
+      "args": [
+        "${input:appConn}",
+        "BEGIN pr_export_kpis_daily; pr_export_ventas_por_producto(TRUNC(SYSDATE-7), TRUNC(SYSDATE), 'ventas_prod_ult7d.csv'); END; /"
+      ],
+      "presentation": {"reveal": "always"}
+    }
+  ],
+  "inputs": [
+    {
+      "id": "appConn",
+      "type": "promptString",
+      "description": "user/pass@host:port/DB",
+      "password": true
+    },
+    {
+      "id": "sysConn",
+      "type": "promptString",
+      "description": "sys/password@host:port/DB as sysdba",
+      "password": true
+    }
+  ]
+}
