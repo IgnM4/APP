@@ -40,10 +40,12 @@ Monorepo para una PyME de distribución de gas. Incluye:
    ```
 5. Publicar CSV y servir la web:
    ```bash
+
    export DB_URL=//localhost:1521/XEPDB1
    export DB_USER=app_user
    export DB_PASS=change_me
    export EXPORT_DIR=/ruta/a/csvs
+
    node scripts/publish_web.mjs
    cd web-app
    npm ci
@@ -54,7 +56,11 @@ Monorepo para una PyME de distribución de gas. Incluye:
 - **Backend Node (server/.env):** `PORT`, `DB_USER`, `DB_PASSWORD`, `DB_CONNECT_STRING`
 - **JDBC/Desktop (desktop-app/app.properties):** `APP_DB_URL`, `APP_DB_USER`, `APP_DB_PASSWORD`
 - **Liquibase:** `LIQUI_URL`, `LIQUI_USER`, `LIQUI_PASS`
+
 - **Scripts:** `SQLCL_BIN`, `DB_URL`, `DB_USER`, `DB_PASS`, `EXPORT_DIR`
+=======
+- **Scripts:** `SQLCL_BIN`, `EXPORT_DIR`
+
 - **Docker Compose:** `ORACLE_PASSWORD`, `DB_USER`, `DB_PASSWORD`, `API_PORT`
 
 Consulta `credenciales.txt` para un listado de todas las variables sensibles.

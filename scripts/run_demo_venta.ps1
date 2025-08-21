@@ -1,4 +1,5 @@
 $sql = Join-Path $PSScriptRoot 'demo_venta.sql'
+
 $sqlcl = $env:SQLCL_BIN
 $dbUser = $env:DB_USER
 $dbPass = $env:DB_PASS
@@ -14,4 +15,7 @@ if ($dbUser -and $dbPass -and $dbUrl) {
 } else {
   Write-Warning 'DB_URL/DB_USER/DB_PASS incompletos; se omite SQLcl'
 }
+
+& sqlplus 'APP_PYME/App_Pyme_2025@//localhost:1521/XEPDB1' "@$sql"
+
 

@@ -1,5 +1,6 @@
 @echo off
 setlocal
+
 set DATA_DIR=%~dp0..\web-app\public\data
 
 if defined SQLCL_BIN (
@@ -11,6 +12,13 @@ if defined SQLCL_BIN (
 ) else (
   echo SQLCL_BIN no definido; se omite exportacion de BD
 )
+
+set SQLCL=C:\Oracle\sqlcl\bin\sql.exe
+set EXPORT_DIR=C:\oracle_export
+set DATA_DIR=%~dp0..\web-app\public\data
+
+echo BEGIN pr_export_kpis_daily; END; / | %SQLCL% APP_PYME/App_Pyme_2025@//localhost:1521/XEPDB1
+
 
 for %%F in ("%EXPORT_DIR%\ventas_hoy*.csv") do set VENTAS_HOY=%%~nxF
 for %%F in ("%EXPORT_DIR%\ventas_prod_ult7d*.csv") do set VENTAS_PROD=%%~nxF

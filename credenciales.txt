@@ -5,7 +5,9 @@ Variables sensibles requeridas:
 - LIQUI_URL / LIQUI_USER / LIQUI_PASS: para Liquibase al ejecutar migraciones (db-project/liquibase/liquibase.properties.example).
 - SQLCL_BIN: ruta al ejecutable de SQLcl para scripts/publish_web.mjs.
 - EXPORT_DIR: directorio donde la app de escritorio genera los CSV consumidos por la web.
+
 - DB_URL / DB_USER / DB_PASS: conexión usada por scripts como publish_web.* y run_demo_venta.ps1.
+
 - ORACLE_PASSWORD: contraseña inicial del contenedor Oracle (docker-compose.yml).
 - API_PORT: puerto expuesto por la API cuando se usa Docker Compose.
 

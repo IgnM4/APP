@@ -13,7 +13,11 @@
 cd docker
 docker compose up -d
 # Usuario APP_PYME y PDB XEPDB1 quedan listos
+
 Conexión: APP_PYME/change_me@localhost:1521/XEPDB1
+
+Conexión: APP_PYME/App_Pyme_2025@localhost:1521/XEPDB1
+
 
 B) Local
 
@@ -86,7 +90,11 @@ Listo. Con esto tienes **entorno, automatización y demo funcional**.
 ### KPI diarios
 - Ejecutar ahora:
   ```bash
+
   sql -thin APP_PYME/change_me@//localhost:1521/XEPDB1 @"scripts/run_export_now.sql"
+
+  sql -thin APP_PYME/App_Pyme_2025@//localhost:1521/XEPDB1 @"scripts/run_export_now.sql"
+
 Archivos:
 
 C:\oracle_export\ventas_hoy_YYYYMMDD.csv
@@ -94,7 +102,11 @@ C:\oracle_export\ventas_hoy_YYYYMMDD.csv
 C:\oracle_export\ventas_prod_ult7d_YYYYMMDD.csv
 
 Chequear jobs y logs
+
 sql -thin APP_PYME/change_me@//localhost:1521/XEPDB1 @"scripts/check_scheduler.sql"
+
+sql -thin APP_PYME/App_Pyme_2025@//localhost:1521/XEPDB1 @"scripts/check_scheduler.sql"
+
 
 ---
 

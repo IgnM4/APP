@@ -7,9 +7,13 @@ const app = express();
 app.use(express.json());
 app.use("/api/ventas", ventas);
 
+
 const wantedPort = Number(
   process.env.PORT || process.env.API_PORT || 4000
 );
+
+const wantedPort = Number(process.env.PORT || 4000);
+
 
 getPool()
   .catch(err => {
