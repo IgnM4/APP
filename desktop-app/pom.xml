@@ -120,7 +120,7 @@
         <properties>
           <db.url>jdbc:oracle:thin:@//localhost:1521/XEPDB1</db.url>
           <db.user>APP_PYME</db.user>
-          <db.pass>App_Pyme_2025</db.pass>
+          <db.pass>change_me</db.pass>
         </properties>
         <dependencies>
           <dependency>

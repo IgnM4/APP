@@ -1,3 +1,6 @@
 $sql = Join-Path $PSScriptRoot 'demo_venta.sql'
-& sqlplus 'APP_PYME/App_Pyme_2025@//localhost:1521/XEPDB1' "@$sql"
+$user = $env:DB_USER; if (-not $user) { $user = 'APP_PYME' }
+$pass = $env:DB_PASSWORD; if (-not $pass) { $pass = 'change_me' }
+$conn = $env:DB_CONNECT_STRING; if (-not $conn) { $conn = '//localhost:1521/XEPDB1' }
+& sqlplus "$user/$pass@$conn" "@$sql"
 

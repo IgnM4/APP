@@ -30,7 +30,7 @@ Monorepo para una PyME de distribución de gas. Incluye:
 3. Backend API:
    ```bash
    cd server
-   cp .env.example .env  # editar con tus valores
+    cp .env.example .env  # editar con tus valores
    npm ci
    npm run dev           # o npm run build && npm start
    ```
@@ -47,9 +47,9 @@ Monorepo para una PyME de distribución de gas. Incluye:
    ```
 
 ## Variables de entorno
-- **Backend Node (server/.env):** `PORT`, `DB_USER`, `DB_PASSWORD`, `DB_CONNECT_STRING`
+- **Backend Node (server/.env):** `API_PORT` (o `PORT`), `DB_USER`, `DB_PASSWORD`, `DB_CONNECT_STRING`
 - **JDBC/Desktop (desktop-app/app.properties):** `APP_DB_URL`, `APP_DB_USER`, `APP_DB_PASSWORD`
-- **Liquibase:** `LIQUI_URL`, `LIQUI_USER`, `LIQUI_PASS`
+- **Liquibase y scripts:** `LIQUI_URL`, `LIQUI_USER`, `LIQUI_PASS`
 - **Scripts:** `SQLCL_BIN`, `EXPORT_DIR`
 - **Docker Compose:** `ORACLE_PASSWORD`, `DB_USER`, `DB_PASSWORD`, `API_PORT`
 
@@ -70,4 +70,4 @@ git commit -m "chore: remove build artifacts"
 ```
 
 ## Otros
-- `db-project/docker/docker-compose.yml` levanta únicamente Oracle XE para pruebas aisladas.
+- `db-project/docker/docker-compose.yml.example` levanta únicamente Oracle XE para pruebas aisladas.
