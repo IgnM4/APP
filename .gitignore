@@ -35,3 +35,6 @@ Thumbs.db
 # Firebase
 .firebase/
 .firebaserc.local
+
+# Exported data
+oracle_export/

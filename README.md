@@ -47,11 +47,15 @@ Monorepo para una PyME de distribución de gas. Incluye:
    ```
 
 ## Variables de entorno
-- **Backend Node (server/.env):** `API_PORT` (o `PORT`), `DB_USER`, `DB_PASSWORD`, `DB_CONNECT_STRING`
-- **JDBC/Desktop (desktop-app/app.properties):** `APP_DB_URL`, `APP_DB_USER`, `APP_DB_PASSWORD`
-- **Liquibase y scripts:** `LIQUI_URL`, `LIQUI_USER`, `LIQUI_PASS`
-- **Scripts:** `SQLCL_BIN`, `EXPORT_DIR`
-- **Docker Compose:** `ORACLE_PASSWORD`, `DB_USER`, `DB_PASSWORD`, `API_PORT`
+| Componente | Variables |
+|------------|-----------|
+| Backend Node (`server/.env`) | `API_PORT` (o `PORT`), `DB_USER`, `DB_PASSWORD`, `DB_CONNECT_STRING` **o** `DB_URL` |
+| JDBC/Desktop (`desktop-app/app.properties`) | `APP_DB_URL`, `APP_DB_USER`, `APP_DB_PASSWORD` |
+| Liquibase y scripts | `LIQUI_URL`, `LIQUI_USER`, `LIQUI_PASS` |
+| Scripts | `SQLCL_BIN`, `EXPORT_DIR` |
+| Docker Compose | `ORACLE_PASSWORD`, `DB_USER`, `DB_PASSWORD`, `API_PORT` |
+
+El backend acepta `DB_URL` como alias de `DB_CONNECT_STRING` para compatibilidad.
 
 Consulta `credenciales.txt` para un listado de todas las variables sensibles.
 
@@ -69,5 +73,21 @@ git rm -r --cached **/node_modules **/dist **/build **/target
 git commit -m "chore: remove build artifacts"
 ```
 
+Para dejar de rastrear datos exportados en `oracle_export/`:
+```bash
+git rm -r --cached oracle_export
+git add .
+git commit -m "chore: stop tracking exported data"
+```
+
+El contenido de `oracle_export/` puede ser sensible. Mantén estos datos fuera del control de versiones o utiliza un repositorio/artefacto separado.
+
 ## Otros
+- `docker-compose.yml` levanta la API en el puerto `${API_PORT:-4000}`.
 - `db-project/docker/docker-compose.yml.example` levanta únicamente Oracle XE para pruebas aisladas.
+
+## Troubleshooting
+
+- **No se puede conectar a la BD:** revisa `DB_USER`, `DB_PASSWORD` y `DB_CONNECT_STRING`/`DB_URL`. Si usas desarrollo local, puedes arrancar con `ALLOW_START_WITHOUT_DB=true`.
+- **Puerto en uso:** la API usa `API_PORT` (por defecto 4000). Cambia la variable o libera el puerto.
+- **Falta Oracle Instant Client:** instala el Instant Client si te conectas a una BD remota sin Docker.

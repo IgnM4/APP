@@ -1,19 +1,23 @@
 import express from "express";
 import "dotenv/config";
 import ventas from "./routes/ventas.js";
-import { getPool } from "./db.js";
+import { initPool, isDbHealthy } from "./db.js";
 
 const app = express();
 app.use(express.json());
 app.use("/api/ventas", ventas);
 
-const wantedPort = Number(process.env.PORT || process.env.API_PORT || 4000);
+const wantedPort = Number(process.env.API_PORT || process.env.PORT || 4000);
 
-getPool()
+const allowStartWithoutDb = process.env.ALLOW_START_WITHOUT_DB === "true";
+
+initPool()
   .catch(err => {
-    console.error("No se pudo conectar a la base de datos:", err.message);
-    console.error("La API se iniciará pero las rutas que dependan de la BD pueden fallar.");
-    // TODO: implementar reintentos o backoff según necesidad
+    console.error("No se pudo conectar a la base de datos:", err.message || err);
+    if (!allowStartWithoutDb) {
+      process.exit(1);
+    }
+    console.warn("Continuando sin conexión a la BD por ALLOW_START_WITHOUT_DB=true");
   })
   .finally(() => {
     const server = app.listen(wantedPort, () =>
@@ -30,3 +34,7 @@ getPool()
       }
     });
   });
+
+app.get("/health", (_req, res) => {
+  res.json({ db: isDbHealthy() ? "up" : "down" });
+});
