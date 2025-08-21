@@ -1,0 +1,47 @@
+cat > .gitignore <<'EOF'
+# Dependencias
+**/node_modules/
+**/.pnp.cjs
+**/.pnp.loader.mjs
+
+# Builds
+**/dist/
+**/build/
+**/out/
+
+# IDE/OS
+**/.idea/
+**/.vscode/
+.DS_Store
+Thumbs.db
+
+# Env/secretos
+*.env
+**/*.env
+.env.*
+!.env.example
+**/*.key
+**/*.pem
+
+# Java / Maven / Gradle
+**/target/
+**/.mvn/
+**/.gradle/
+**/*.iml
+
+# Logs
+**/*.log
+**/logs/
+
+# Firebase
+.firebaserc.local
+.firebase/
+EOF
+
+# (Opcional) fusiona lo que tenías en APP/.gitignore
+if [ -f APP/.gitignore ]; then
+  echo -e "\n# --- from APP/.gitignore ---" >> .gitignore
+  cat APP/.gitignore >> .gitignore
+  git rm --cached APP/.gitignore
+  rm APP/.gitignore
+fi
