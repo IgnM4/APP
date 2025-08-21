@@ -1,11 +1,10 @@
 services:
   oracle-xe:
     image: gvenzl/oracle-xe:21-slim
-    container_name: oracle-xe
     environment:
-      - ORACLE_PASSWORD=change_me
-      - APP_USER=app_user
-      - APP_USER_PASSWORD=change_me
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD:-change_me}
+      APP_USER: ${DB_USER:-app_user}
+      APP_USER_PASSWORD: ${DB_PASSWORD:-change_me}
     ports:
       - "1521:1521"
       - "5500:5500"
@@ -21,9 +20,9 @@ services:
       oracle-xe:
         condition: service_healthy
     environment:
-      - DB_USER=app_user
-      - DB_PASSWORD=change_me
-      - DB_CONNECT_STRING=oracle-xe:1521/XEPDB1
-      - PORT=4000
+      PORT: ${API_PORT:-4000}
+      DB_USER: ${DB_USER:-app_user}
+      DB_PASSWORD: ${DB_PASSWORD:-change_me}
+      DB_CONNECT_STRING: oracle-xe:1521/XEPDB1
     ports:
-      - "4000:4000"
+      - "${API_PORT:-4000}:4000"

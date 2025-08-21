@@ -10,9 +10,9 @@ export async function getPool(): Promise<oracledb.Pool> {
   if (pool) return pool;
 
   pool = await oracledb.createPool({
-    user: process.env.DB_USER ?? "APP_PYME",
-    password: process.env.DB_PASSWORD ?? "App_Pyme_2025",
-    connectString: process.env.DB_CONNECT_STRING ?? "localhost:1521/XEPDB1",
+    user: process.env.DB_USER || "app_user",
+    password: process.env.DB_PASSWORD || "change_me",
+    connectString: process.env.DB_CONNECT_STRING || "localhost:1521/XEPDB1",
     poolMin: 1,
     poolMax: 4,
     poolIncrement: 1,
