@@ -1,6 +1,8 @@
-url=jdbc:oracle:thin:@//localhost:1521/XEPDB1
-username=APP_PYME
-password=App_Pyme_2025
-changeLogFile=liquibase/changelog-master.xml
-defaultSchemaName=APP_PYME
-searchPath=db-project,db-project/liquibase,db-project/ddl
+# Se usa --defaultsFile apuntando a una copia REAL sin credenciales en git
+classpath=./drivers
+changeLogFile=./changelog-master.xml
+
+# Variables provistas desde el entorno o línea de comando
+url=${LIQUI_URL}
+username=${LIQUI_USER}
+password=${LIQUI_PASS}

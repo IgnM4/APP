@@ -4,8 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "tsx src/app.ts",
+    "build": "tsc",
     "start": "node dist/app.js",
-    "build": "tsc -p ."
+    "lint": "echo \"(agrega eslint si quieres)\""
   },
   "dependencies": {
     "dotenv": "^16.4.5",

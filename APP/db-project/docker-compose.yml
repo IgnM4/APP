@@ -1,0 +1,29 @@
+services:
+  oracle-xe:
+    image: gvenzl/oracle-xe:21-slim
+    container_name: oracle-xe
+    environment:
+      - ORACLE_PASSWORD=change_me
+      - APP_USER=app_user
+      - APP_USER_PASSWORD=change_me
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    healthcheck:
+      test: ["CMD", "bash", "-c", "echo 'select 1 from dual;' | sqlplus -s system/\"$${ORACLE_PASSWORD}\"@localhost:1521/XEPDB1"]
+      interval: 15s
+      timeout: 5s
+      retries: 30
+
+  server:
+    build: ./server
+    depends_on:
+      oracle-xe:
+        condition: service_healthy
+    environment:
+      - DB_USER=app_user
+      - DB_PASSWORD=change_me
+      - DB_CONNECT_STRING=oracle-xe:1521/XEPDB1
+      - PORT=4000
+    ports:
+      - "4000:4000"

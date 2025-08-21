@@ -1,9 +1,37 @@
-# General
-node_modules/
+# Dependencias
+**/node_modules/
+**/.pnp.cjs
+**/.pnp.loader.mjs
+
+# Builds
+**/dist/
+**/build/
+**/out/
+
+# IDEs/OS
+**/.idea/
+**/.vscode/
 .DS_Store
-# Java build
+Thumbs.db
+
+# Env/secretos
+*.env
+**/*.env
+.env.*
+!.env.example
+**/*.key
+**/*.pem
+
+# Java / Maven / Gradle
 **/target/
-# ---- project ignores ----
-*.zip
-*.log
-*.lst
+**/.mvn/
+**/.gradle/
+**/*.iml
+
+# Logs
+**/*.log
+**/logs/
+
+# Firebase
+.firebaserc.local
+.firebase/
