@@ -3,7 +3,7 @@
 ## Prerrequisitos
 - [Oracle XE 21c](https://www.oracle.com/database/technologies/xe-downloads.html) o contenedor Docker opcional.
 - [SQLcl](https://www.oracle.com/database/technologies/appdev/sqlcl.html) y [Liquibase](https://www.liquibase.org/).
-- Variables de entorno: `DB_URL`, `DB_USER`, `DB_PASS`.
+ - Variables de entorno: `LIQUI_URL`, `LIQUI_USER`, `LIQUI_PASS`.
 
 Para un entorno desechable se puede usar Docker:
 ```bash

@@ -3,9 +3,9 @@ import { existsSync, mkdirSync, readdirSync, copyFileSync, writeFileSync } from 
 import path from 'path';
 
 const sqlcl = process.env.SQLCL_BIN;
-const dbUser = process.env.DB_USER;
-const dbPass = process.env.DB_PASS;
-const dbUrl = process.env.DB_URL;
+const dbUser = process.env.LIQUI_USER;
+const dbPass = process.env.LIQUI_PASS;
+const dbUrl = process.env.LIQUI_URL;
 
 try {
   if (!sqlcl) {
@@ -13,7 +13,7 @@ try {
   } else if (dbUser && dbPass && dbUrl) {
     execSync(`${sqlcl} ${dbUser}/${dbPass}@${dbUrl} @scripts/publish_kpis.sql`, { stdio: 'inherit' });
   } else {
-    console.warn('DB_URL/DB_USER/DB_PASS incompletos; se omite SQLcl');
+    console.warn('LIQUI_URL/LIQUI_USER/LIQUI_PASS incompletos; se omite SQLcl');
   }
 } catch (e) {
   console.error('Error ejecutando SQLcl', e.message);
