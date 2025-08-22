@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set WXS_FILES=Product.wxs Files.wxs ServiceActions.wxs
+set WXS_FILES=Product.wxs Files.wxs Shortcuts.wxs ServiceActions.wxs
 for %%F in (files_*.wxs) do (
   if exist "%%F" set WXS_FILES=!WXS_FILES! %%F
 )
