@@ -53,6 +53,20 @@ msiexec /i AplicacionPyme.msi DB_USER=usuario DB_PASSWORD=clave API_PORT=8080 /q
 
 La interfaz `WixUI_InstallDir` permite elegir la carpeta de instalación mediante la opción `INSTALLDIR`.
 
+## Características opcionales
+El MSI define las features `Desktop`, `ApiService` y `OracleClient`. Puede controlar cuáles instalar usando `ADDLOCAL`.
+
+Incluir el cliente de Oracle:
+```powershell
+msiexec /i AplicacionPyme.msi ADDLOCAL=Desktop,ApiService,OracleClient
+```
+
+Omitir el cliente de Oracle:
+```powershell
+msiexec /i AplicacionPyme.msi ADDLOCAL=Desktop,ApiService
+```
+
+
 ## Archivos de configuración en ProgramData
 Durante la instalación se copian dos archivos de ejemplo en `C:\ProgramData\AplicacionPyme\config\`:
 
