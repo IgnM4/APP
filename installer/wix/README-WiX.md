@@ -47,6 +47,14 @@ msiexec /i AplicacionPyme.msi DB_USER="otro_usuario" DB_PASSWORD="secreto" API_P
 
 La interfaz `WixUI_InstallDir` permite elegir la carpeta de instalación mediante la opción `INSTALLDIR`.
 
+## Archivos de configuración en ProgramData
+Durante la instalación se copian dos archivos de ejemplo en `C:\ProgramData\AplicacionPyme\config\`:
+
+- `app.properties`: parámetros de la aplicación de escritorio.
+- `.env`: variables para el servicio de la API.
+
+Los archivos provienen del directorio `config_templates` y se instalan con `NeverOverwrite="yes"`, por lo que las modificaciones del usuario se conservarán en reinstalaciones o upgrades.
+
 ## Servicio Windows de la API
 La instalación registra la API como un servicio de Windows llamado `AplicacionPymeAPI` utilizando `nssm.exe`. El servicio se inicia automáticamente al final de la instalación y se elimina al desinstalar el MSI.
 
