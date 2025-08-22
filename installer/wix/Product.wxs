@@ -35,6 +35,7 @@
       <ComponentGroupRef Id="CG.OracleClient" />
     </Feature>
 
+    <FragmentRef Id="ServiceActions" />
     <UIRef Id="WixUI_InstallDir" />
   </Product>
 </Wix>

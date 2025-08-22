@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Fragment Id="ServiceActions">
+    <CustomAction Id="InstallApiService"
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="check">
+      <util:WixQuietExec Command='"[INSTALLDIR]nssm.exe" install AplicacionPymeAPI "[INSTALLDIR]node\node.exe" "[INSTALLDIR]server\dist\app.js"'/>
+    </CustomAction>
+
+    <CustomAction Id="ConfigureApiService"
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="check">
+      <util:WixQuietExec Command='"[INSTALLDIR]nssm.exe" set AplicacionPymeAPI AppDirectory "[INSTALLDIR]" && "[INSTALLDIR]nssm.exe" set AplicacionPymeAPI AppStdout "[LOGSDIR]api.log" && "[INSTALLDIR]nssm.exe" set AplicacionPymeAPI AppStderr "[LOGSDIR]api.err.log" && "[INSTALLDIR]nssm.exe" set AplicacionPymeAPI AppRotateFiles 1 && "[INSTALLDIR]nssm.exe" set AplicacionPymeAPI AppRotateBytes 10485760'/>
+    </CustomAction>
+
+    <CustomAction Id="SetApiServiceEnv"
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="check">
+      <util:WixQuietExec Command='"[INSTALLDIR]nssm.exe" set AplicacionPymeAPI AppEnvironmentExtra "DB_USER=[DB_USER];DB_PASSWORD=[DB_PASSWORD];DB_CONNECT_STRING=[DB_CONNECT_STRING];API_PORT=[API_PORT];APP_CONFIG_DIR=[CONFIGDIR]"'/>
+    </CustomAction>
+
+    <CustomAction Id="StartApiService"
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="check">
+      <util:WixQuietExec Command='"[INSTALLDIR]nssm.exe" start AplicacionPymeAPI'/>
+    </CustomAction>
+
+    <CustomAction Id="StopApiService"
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="check">
+      <util:WixQuietExec Command='"[INSTALLDIR]nssm.exe" stop AplicacionPymeAPI'/>
+    </CustomAction>
+
+    <CustomAction Id="RemoveApiService"
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="check">
+      <util:WixQuietExec Command='"[INSTALLDIR]nssm.exe" remove AplicacionPymeAPI confirm'/>
+    </CustomAction>
+
+    <InstallExecuteSequence>
+      <Custom Action="InstallApiService" After="InstallFiles">NOT Installed AND &ApiService=3</Custom>
+      <Custom Action="ConfigureApiService" After="InstallApiService">NOT Installed AND &ApiService=3</Custom>
+      <Custom Action="SetApiServiceEnv" After="ConfigureApiService">NOT Installed AND &ApiService=3</Custom>
+      <Custom Action="StartApiService" After="SetApiServiceEnv">NOT Installed AND &ApiService=3</Custom>
+      <Custom Action="StopApiService" Before="RemoveFiles">REMOVE="ALL" AND ?ApiService=3</Custom>
+      <Custom Action="RemoveApiService" After="StopApiService">REMOVE="ALL" AND ?ApiService=3</Custom>
+    </InstallExecuteSequence>
+  </Fragment>
+</Wix>

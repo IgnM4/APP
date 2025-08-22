@@ -46,3 +46,21 @@ msiexec /i AplicacionPyme.msi DB_USER="otro_usuario" DB_PASSWORD="secreto" API_P
 ```
 
 La interfaz `WixUI_InstallDir` permite elegir la carpeta de instalación mediante la opción `INSTALLDIR`.
+
+## Servicio Windows
+
+Si durante la instalación se selecciona la característica **ApiService**, el MSI registra un servicio de Windows llamado `AplicacionPymeAPI` utilizando [NSSM](https://nssm.cc/). El servicio se inicia automáticamente y guarda los logs en `INSTALLDIR\logs`.
+
+Para comprobar su estado:
+
+```powershell
+sc query AplicacionPymeAPI
+```
+
+Las propiedades `DB_USER`, `DB_PASSWORD`, `DB_CONNECT_STRING` y `API_PORT` se pasan como variables de entorno al servicio junto con `APP_CONFIG_DIR` apuntando a `CONFIGDIR`. Puede sobreescribirlas al instalar:
+
+```powershell
+msiexec /i AplicacionPyme.msi DB_USER="otro_usuario" DB_PASSWORD="secreto" DB_CONNECT_STRING="servidor:1521/XEPDB1" API_PORT=8080
+```
+
+Si `node\node.exe` o `server\dist\app.js` faltan en `INSTALLDIR`, la instalación mostrará un error al crear el servicio.
