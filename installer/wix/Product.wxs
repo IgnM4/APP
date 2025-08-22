@@ -23,14 +23,22 @@
           <Directory Id="CONFIGDIR" Name="config" />
         </Directory>
       </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuDir" Name="AplicacionPyme" />
+      </Directory>
     </Directory>
 
     <Feature Id="Desktop" Title="Desktop" Level="1">
       <ComponentGroupRef Id="CG.Desktop" />
+      <ComponentGroupRef Id="CG.Shortcuts" />
     </Feature>
     <Feature Id="ApiService" Title="ApiService" Level="1">
       <ComponentGroupRef Id="CG.Api" />
+
+      <ComponentGroupRef Id="CG.Logs" />
+
       <ComponentGroupRef Id="CG.Config" />
+
     </Feature>
     <Feature Id="OracleClient" Title="OracleClient" Level="1">
       <ComponentGroupRef Id="CG.OracleClient" />

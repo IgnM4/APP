@@ -45,6 +45,12 @@ Puede sobreescribirlas al momento de instalar:
 msiexec /i AplicacionPyme.msi DB_USER="otro_usuario" DB_PASSWORD="secreto" API_PORT=8080
 ```
 
+Para instalaciones silenciosas se puede agregar `/qn` al comando:
+
+```powershell
+msiexec /i AplicacionPyme.msi DB_USER=usuario DB_PASSWORD=clave API_PORT=8080 /qn
+```
+
 La interfaz `WixUI_InstallDir` permite elegir la carpeta de instalación mediante la opción `INSTALLDIR`.
 
 ## Archivos de configuración en ProgramData
@@ -75,3 +81,11 @@ Las propiedades `DB_USER`, `DB_PASSWORD`, `DB_CONNECT_STRING` y `API_PORT` se pa
 ```powershell
 msiexec /i AplicacionPyme.msi DB_USER=usuario DB_PASSWORD=clave DB_CONNECT_STRING="servidor:puerto/servicio" API_PORT=8080
 ```
+
+## Pruebas
+
+1. Instalar el MSI pasando las propiedades necesarias.
+2. Verificar que el servicio `AplicacionPymeAPI` esté en ejecución.
+3. Confirmar que se creó `INSTALLDIR\\logs` y la carpeta `ProgramData\\AplicacionPyme` con los archivos de configuración.
+4. Si se incluye la aplicación de escritorio, comprobar los accesos directos en el menú Inicio y el escritorio.
+5. Desinstalar y validar que el servicio y los archivos en `ProgramFiles` y `ProgramData` se eliminaron.

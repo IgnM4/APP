@@ -10,6 +10,16 @@
   </Fragment>
 
   <Fragment>
+    <DirectoryRef Id="LOGSDIR">
+      <Component Id="Cmp.LogsFolder" Guid="*">
+        <CreateFolder />
+        <RemoveFolder Id="RemoveLogsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\\AplicacionPyme" Name="logsfolder" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+
+  <Fragment>
     <ComponentGroup Id="CG.Api">
       <ComponentRef Id="Cmp.NssmExe" />
       <!-- Components harvested into CG.Api will be referenced here -->
@@ -19,6 +29,12 @@
   <Fragment>
     <ComponentGroup Id="CG.Desktop">
       <!-- Components harvested into CG.Desktop will be referenced here -->
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="CG.Logs">
+      <ComponentRef Id="Cmp.LogsFolder" />
     </ComponentGroup>
   </Fragment>
 
