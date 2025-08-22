@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="AplicacionPyme" Version="1.0.0" Manufacturer="TuEmpresa" Language="1033" UpgradeCode="e18e4adb-79b7-43da-9c0b-d68fadbd7a96">
+    <Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Property Id="DB_USER" Value="app_user" />
+    <Property Id="DB_PASSWORD" Value="change_me" />
+    <Property Id="DB_CONNECT_STRING" Value="localhost:1521/XEPDB1" />
+    <Property Id="API_PORT" Value="4000" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLDIR" Name="AplicacionPyme">
+          <Directory Id="LOGSDIR" Name="logs" />
+        </Directory>
+      </Directory>
+      <Directory Id="CommonAppDataFolder">
+        <Directory Id="APPDATADIR" Name="AplicacionPyme">
+          <Directory Id="CONFIGDIR" Name="config" />
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="Desktop" Title="Desktop" Level="1" />
+    <Feature Id="ApiService" Title="ApiService" Level="1" />
+    <Feature Id="OracleClient" Title="OracleClient" Level="1" />
+
+    <UIRef Id="WixUI_InstallDir" />
+  </Product>
+</Wix>
