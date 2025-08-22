@@ -35,6 +35,21 @@
       <ComponentGroupRef Id="CG.OracleClient" />
     </Feature>
 
+    <InstallExecuteSequence>
+      <!-- Verify that service files exist before installing -->
+      <Custom Action="CA.VerifyServiceFiles" After="InstallFiles">NOT Installed AND &ApiService=3</Custom>
+      <!-- Install and configure service -->
+      <Custom Action="CA.InstallService" After="CA.VerifyServiceFiles">NOT Installed AND &ApiService=3</Custom>
+      <Custom Action="CA.SetServiceDirectory" After="CA.InstallService">NOT Installed AND &ApiService=3</Custom>
+      <Custom Action="CA.SetServiceLogs" After="CA.SetServiceDirectory">NOT Installed AND &ApiService=3</Custom>
+      <Custom Action="CA.SetServiceEnv" After="CA.SetServiceLogs">NOT Installed AND &ApiService=3</Custom>
+      <Custom Action="CA.StartService" After="CA.SetServiceEnv">NOT Installed AND &ApiService=3</Custom>
+
+      <!-- Stop and remove service on uninstall -->
+      <Custom Action="CA.StopService" Before="CA.RemoveService">REMOVE="ALL" AND ?ApiService=3</Custom>
+      <Custom Action="CA.RemoveService" Before="RemoveFiles">REMOVE="ALL" AND ?ApiService=3</Custom>
+    </InstallExecuteSequence>
+
     <UIRef Id="WixUI_InstallDir" />
   </Product>
 </Wix>
