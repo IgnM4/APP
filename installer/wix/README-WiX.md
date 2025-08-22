@@ -15,6 +15,20 @@ Este directorio contiene un esqueleto de proyecto [WiX Toolset](https://wixtools
    ```
    Se generará el archivo `AplicacionPyme.msi`.
 
+Si faltan archivos como `third_party\nssm\nssm.exe`, puede comentar temporalmente el componente correspondiente en `Files.wxs` para que el proyecto compile.
+
+### Harvest con Heat
+WiX no admite comodines de forma nativa. Utilice [heat.exe](https://wixtoolset.org/documentation/manual/v3/overview/heat.html) para generar fragmentos `.wxs` a partir de directorios reales. Ejemplos:
+
+```bat
+heat dir ..\third_party\node -nologo -cg CG.Api -dr INSTALLDIR -var var.SourceDir -out files_node.wxs
+heat dir ..\server\dist -nologo -cg CG.Api -dr INSTALLDIR -var var.SourceDir -out files_server_dist.wxs
+heat dir ..\desktop\AplicacionPyme -nologo -cg CG.Desktop -dr INSTALLDIR -var var.SourceDir -out files_desktop.wxs
+heat dir ..\third_party\oracle\instantclient -nologo -cg CG.OracleClient -dr INSTALLDIR -var var.SourceDir -out files_oracle.wxs
+```
+
+Los archivos generados (`files_*.wxs`) se incluyen automáticamente por `build_msi.bat` si están presentes.
+
 ## Propiedades de base de datos y API
 El MSI expone las siguientes propiedades con valores por defecto:
 
