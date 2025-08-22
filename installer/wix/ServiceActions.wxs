@@ -3,6 +3,8 @@
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
   <Fragment Id="ServiceActions">
+  <Property Id="ORACLE_PATH" Value=""/>
+  <CustomAction Id="CA.SetOraclePath" Property="ORACLE_PATH" Value="\r\nPATH=%PATH%;[INSTALLDIR]oracle\instantclient"/>
 
   <Fragment>
 
@@ -27,7 +29,7 @@
 
     <!-- Configure environment variables -->
     <util:WixQuietExec Id="CA.SetServiceEnv"
-      Command='"[INSTALLDIR]nssm.exe" set AplicacionPymeAPI AppEnvironmentExtra "DB_USER=[DB_USER]\r\nDB_PASSWORD=[DB_PASSWORD]\r\nDB_CONNECT_STRING=[DB_CONNECT_STRING]\r\nAPI_PORT=[API_PORT]\r\nAPP_CONFIG_DIR=[CONFIGDIR]"'
+      Command='"[INSTALLDIR]nssm.exe" set AplicacionPymeAPI AppEnvironmentExtra "DB_USER=[DB_USER]\r\nDB_PASSWORD=[DB_PASSWORD]\r\nDB_CONNECT_STRING=[DB_CONNECT_STRING]\r\nAPI_PORT=[API_PORT]\r\nAPP_CONFIG_DIR=[CONFIGDIR][ORACLE_PATH]"'
       Execute="deferred" Impersonate="no" Return="check"/>
 
     <!-- Start service -->

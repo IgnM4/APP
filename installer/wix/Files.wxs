@@ -8,6 +8,18 @@
       </Component>
     </DirectoryRef>
   </Fragment>
+  <Fragment>
+    <DirectoryRef Id="INSTALLDIR">
+      <Directory Id="Dir.Oracle" Name="oracle">
+        <Directory Id="Dir.OracleInstantClient" Name="instantclient">
+          <Component Id="Cmp.OracleInstantClientPlaceholder" Guid="*">
+            <File Id="Fil.OracleInstantClientPlaceholder" Source="$(var.SourceDir)\third_party\oracle\instantclient\instantclient.txt" KeyPath="yes" />
+          </Component>
+        </Directory>
+      </Directory>
+    </DirectoryRef>
+  </Fragment>
+
 
   <Fragment>
     <DirectoryRef Id="LOGSDIR">
@@ -40,6 +52,7 @@
 
   <Fragment>
     <ComponentGroup Id="CG.OracleClient">
+      <ComponentRef Id="Cmp.OracleInstantClientPlaceholder" />
       <!-- Components harvested into CG.OracleClient will be referenced here -->
     </ComponentGroup>
   </Fragment>

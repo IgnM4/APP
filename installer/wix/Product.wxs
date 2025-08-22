@@ -52,6 +52,7 @@
       <Custom Action="CA.InstallService" After="CA.VerifyServiceFiles">NOT Installed AND &ApiService=3</Custom>
       <Custom Action="CA.SetServiceDirectory" After="CA.InstallService">NOT Installed AND &ApiService=3</Custom>
       <Custom Action="CA.SetServiceLogs" After="CA.SetServiceDirectory">NOT Installed AND &ApiService=3</Custom>
+        <Custom Action="CA.SetOraclePath" Before="CA.SetServiceEnv">NOT Installed AND &ApiService=3 AND &OracleClient=3</Custom>
       <Custom Action="CA.SetServiceEnv" After="CA.SetServiceLogs">NOT Installed AND &ApiService=3</Custom>
       <Custom Action="CA.StartService" After="CA.SetServiceEnv">NOT Installed AND &ApiService=3</Custom>
 
@@ -67,6 +68,7 @@
       <Custom Action="CA.InstallService" After="CA.VerifyServiceFiles">NOT Installed AND &ApiService=3</Custom>
       <Custom Action="CA.SetServiceDirectory" After="CA.InstallService">NOT Installed AND &ApiService=3</Custom>
       <Custom Action="CA.SetServiceLogs" After="CA.SetServiceDirectory">NOT Installed AND &ApiService=3</Custom>
+        <Custom Action="CA.SetOraclePath" Before="CA.SetServiceEnv">NOT Installed AND &ApiService=3 AND &OracleClient=3</Custom>
       <Custom Action="CA.SetServiceEnv" After="CA.SetServiceLogs">NOT Installed AND &ApiService=3</Custom>
       <Custom Action="CA.StartService" After="CA.SetServiceEnv">NOT Installed AND &ApiService=3</Custom>
 
