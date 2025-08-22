@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
   <Fragment Id="ServiceActions">
+
+  <Fragment>
+
     <!-- Verify required files exist -->
     <util:WixQuietExec Id="CA.VerifyServiceFiles"
       Command='cmd /c if exist "[INSTALLDIR]node\\node.exe" (if exist "[INSTALLDIR]server\\dist\\app.js" (exit 0) else (echo Missing server\\dist\\app.js && exit 1)) else (echo Missing node\\node.exe && exit 1)'
