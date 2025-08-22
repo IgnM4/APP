@@ -34,7 +34,11 @@
     </Feature>
     <Feature Id="ApiService" Title="ApiService" Level="1">
       <ComponentGroupRef Id="CG.Api" />
+
       <ComponentGroupRef Id="CG.Logs" />
+
+      <ComponentGroupRef Id="CG.Config" />
+
     </Feature>
     <Feature Id="OracleClient" Title="OracleClient" Level="1">
       <ComponentGroupRef Id="CG.OracleClient" />
